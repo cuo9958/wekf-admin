@@ -2,8 +2,8 @@ import request from '@/utils/request'
 
 export function getList(data) {
   return request({
-    url: '/userManagement/getList',
-    method: 'post',
+    url: '/user',
+    method: 'get',
     data,
   })
 }

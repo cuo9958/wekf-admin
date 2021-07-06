@@ -1,5 +1,4 @@
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description cli配置
  */
 
@@ -15,11 +14,8 @@ const {
   devPort,
   providePlugin,
   build7z,
-  donation,
 } = require('./src/config')
-const { webpackBarName, webpackBanner, donationConsole } = require('zx-layouts')
 
-if (donation) donationConsole()
 const { version, author } = require('./package.json')
 const Webpack = require('webpack')
 const WebpackBar = require('webpackbar')
@@ -43,7 +39,6 @@ module.exports = {
   assetsDir,
   outputDir,
   lintOnSave,
-
   transpileDependencies,
   devServer: {
     hot: true,
@@ -55,6 +50,11 @@ module.exports = {
       errors: true,
     },
     after: mockServer(),
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8082',
+      },
+    },
   },
   configureWebpack() {
     return {
@@ -66,7 +66,7 @@ module.exports = {
       plugins: [
         new Webpack.ProvidePlugin(providePlugin),
         new WebpackBar({
-          name: webpackBarName,
+          name: '后台系统',
         }),
       ],
     }
@@ -137,10 +137,6 @@ module.exports = {
           },
         },
       })
-      config
-        .plugin('banner')
-        .use(Webpack.BannerPlugin, [`${webpackBanner}${time}`])
-        .end()
       config.module
         .rule('images')
         .use('image-webpack-loader')
