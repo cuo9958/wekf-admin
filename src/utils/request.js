@@ -19,7 +19,6 @@ import { isArray } from '@/utils/validate'
 let loadingInstance
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 处理code异常
  * @param {*} code
  * @param {*} msg
@@ -80,7 +79,7 @@ instance.interceptors.response.use(
   (response) => {
     if (loadingInstance) loadingInstance.close()
 
-    const { data, config } = response
+    const { data } = response
     const { code, msg } = data
     // 操作正常Code数组
     const codeVerificationArray = isArray(successCode)
@@ -91,10 +90,7 @@ instance.interceptors.response.use(
       return data
     } else {
       handleCode(code, msg)
-      return Promise.reject(
-        'vue-admin-beautiful请求异常拦截:' +
-          JSON.stringify({ url: config.url, code, msg }) || 'Error'
-      )
+      return Promise.reject(msg)
     }
   },
   (error) => {

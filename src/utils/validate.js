@@ -1,5 +1,4 @@
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判读是否为外链
  * @param path
  * @returns {boolean}
@@ -9,7 +8,6 @@ export function isExternal(path) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 校验密码是否小于6位
  * @param str
  * @returns {boolean}
@@ -19,7 +17,6 @@ export function isPassword(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否为数字
  * @param value
  * @returns {boolean}
@@ -30,7 +27,6 @@ export function isNumber(value) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是名称
  * @param value
  * @returns {boolean}
@@ -41,7 +37,6 @@ export function isName(value) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否为IP
  * @param ip
  * @returns {boolean}
@@ -53,7 +48,6 @@ export function isIP(ip) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是传统网站
  * @param url
  * @returns {boolean}
@@ -65,7 +59,6 @@ export function isUrl(url) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是小写字母
  * @param str
  * @returns {boolean}
@@ -76,7 +69,6 @@ export function isLowerCase(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是大写字母
  * @param str
  * @returns {boolean}
@@ -87,7 +79,6 @@ export function isUpperCase(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是大写字母开头
  * @param str
  * @returns {boolean}
@@ -98,7 +89,6 @@ export function isAlphabets(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是字符串
  * @param str
  * @returns {boolean}
@@ -108,7 +98,6 @@ export function isString(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是数组
  * @param arg
  * @returns {arg is any[]|boolean}
@@ -121,7 +110,6 @@ export function isArray(arg) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是端口号
  * @param str
  * @returns {boolean}
@@ -133,7 +121,6 @@ export function isPort(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是手机号
  * @param str
  * @returns {boolean}
@@ -144,7 +131,6 @@ export function isPhone(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是身份证号(第二代)
  * @param str
  * @returns {boolean}
@@ -156,7 +142,6 @@ export function isIdCard(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否是邮箱
  * @param str
  * @returns {boolean}
@@ -167,7 +152,6 @@ export function isEmail(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否中文
  * @param str
  * @returns {boolean}
@@ -178,7 +162,6 @@ export function isChina(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否为空
  * @param str
  * @returns {boolean}
@@ -194,7 +177,6 @@ export function isBlank(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否为固话
  * @param str
  * @returns {boolean}
@@ -206,7 +188,6 @@ export function isTel(str) {
 }
 
 /**
- * @author chuzhixin 1204505056@qq.com （不想保留author可删除）
  * @description 判断是否为数字且最多两位小数
  * @param str
  * @returns {boolean}
