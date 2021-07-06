@@ -20,7 +20,6 @@
         </div>
       </div>
       <div class="vab-main main-padding">
-        <vab-ad />
         <vab-app-main />
       </div>
     </div>
@@ -43,7 +42,6 @@
           <vab-nav-bar />
           <vab-tabs-bar v-if="tabsBar === 'true' || tabsBar === true" />
         </div>
-        <vab-ad />
         <vab-app-main />
       </div>
     </div>
@@ -81,12 +79,6 @@
     },
     mounted() {
       this.oldLayout = this.layout
-      const userAgent = navigator.userAgent
-      if (userAgent.includes('Juejin')) {
-        this.$baseAlert(
-          'vue-admin-beautiful不支持在掘金内置浏览器演示，请手动复制以下地址到浏览器中查看http://mpfhrd48.sanxing.uz7.cn/vue-admin-beautiful'
-        )
-      }
       const isMobile = this.handleIsMobile()
       if (isMobile) {
         if (isMobile) {
