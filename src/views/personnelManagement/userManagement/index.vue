@@ -13,7 +13,7 @@
         <el-form :inline="true" :model="queryForm" @submit.native.prevent>
           <el-form-item>
             <el-input
-              v-model.trim="queryForm.username"
+              v-model.trim="queryForm.user_name"
               placeholder="请输入用户名"
               clearable
             />
@@ -41,26 +41,22 @@
       ></el-table-column>
       <el-table-column
         show-overflow-tooltip
-        prop="username"
+        prop="user_name"
         label="用户名"
       ></el-table-column>
       <el-table-column
         show-overflow-tooltip
-        prop="email"
-        label="邮箱"
+        prop="nickname"
+        label="昵称"
       ></el-table-column>
-
-      <el-table-column show-overflow-tooltip label="权限">
-        <template #default="{ row }">
-          <el-tag v-for="(item, index) in row.permissions" :key="index">
-            {{ item }}
-          </el-tag>
-        </template>
-      </el-table-column>
-
       <el-table-column
         show-overflow-tooltip
-        prop="datatime"
+        prop="role"
+        label="权限"
+      ></el-table-column>
+      <el-table-column
+        show-overflow-tooltip
+        prop="updatedAt"
         label="修改时间"
       ></el-table-column>
       <el-table-column show-overflow-tooltip label="操作" width="200">
@@ -73,10 +69,8 @@
     <el-pagination
       background
       :current-page="queryForm.pageNo"
-      :page-size="queryForm.pageSize"
       :layout="layout"
       :total="total"
-      @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
     ></el-pagination>
     <edit ref="edit" @fetch-data="fetchData"></edit>
@@ -94,14 +88,13 @@
       return {
         list: null,
         listLoading: true,
-        layout: 'total, sizes, prev, pager, next, jumper',
+        layout: 'total, prev, pager, next, jumper',
         total: 0,
         selectRows: '',
         elementLoadingText: '正在加载...',
         queryForm: {
-          pageNo: 1,
-          pageSize: 10,
-          username: '',
+          pageindex: 0,
+          user_name: '',
         },
       }
     },
@@ -140,16 +133,12 @@
           }
         }
       },
-      handleSizeChange(val) {
-        this.queryForm.pageSize = val
-        this.fetchData()
-      },
       handleCurrentChange(val) {
-        this.queryForm.pageNo = val
+        this.queryForm.pageindex = val
         this.fetchData()
       },
       queryData() {
-        this.queryForm.pageNo = 1
+        this.queryForm.pageindex = 0
         this.fetchData()
       },
       async fetchData() {

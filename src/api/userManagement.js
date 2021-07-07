@@ -4,13 +4,13 @@ export function getList(data) {
   return request({
     url: '/user',
     method: 'get',
-    data,
+    params: data,
   })
 }
 
 export function doEdit(data) {
   return request({
-    url: '/userManagement/doEdit',
+    url: '/user/edit',
     method: 'post',
     data,
   })
@@ -18,7 +18,7 @@ export function doEdit(data) {
 
 export function doDelete(data) {
   return request({
-    url: '/userManagement/doDelete',
+    url: '/user/del',
     method: 'post',
     data,
   })

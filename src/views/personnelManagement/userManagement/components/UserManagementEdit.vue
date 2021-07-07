@@ -6,24 +6,27 @@
     @close="close"
   >
     <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-      <el-form-item label="用户名" prop="username">
-        <el-input v-model.trim="form.username" autocomplete="off"></el-input>
+      <el-form-item label="用户名" prop="user_name">
+        <el-input v-model.trim="form.user_name" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="password">
+      <el-form-item label="密码" prop="pwd">
         <el-input
-          v-model.trim="form.password"
+          v-model.trim="form.pwd"
           type="password"
           autocomplete="off"
         ></el-input>
       </el-form-item>
-      <el-form-item label="邮箱" prop="email">
-        <el-input v-model.trim="form.email" autocomplete="off"></el-input>
+      <el-form-item label="昵称" prop="nickname">
+        <el-input v-model.trim="form.nickname" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="权限" prop="permissions">
-        <el-checkbox-group v-model="form.permissions">
-          <el-checkbox label="admin"></el-checkbox>
-          <el-checkbox label="editor"></el-checkbox>
-        </el-checkbox-group>
+      <el-form-item label="头像" prop="headimg">
+        <my-upload v-model="form.headimg" />
+      </el-form-item>
+      <el-form-item label="权限" prop="role">
+        <el-radio-group v-model="form.role">
+          <el-radio label="admin"></el-radio>
+          <el-radio label="editor"></el-radio>
+        </el-radio-group>
       </el-form-item>
     </el-form>
     <div slot="footer" class="dialog-footer">
@@ -35,31 +38,33 @@
 
 <script>
   import { doEdit } from '@/api/userManagement'
+  import MyUpload from '../../../../components/upload.vue'
 
   export default {
     name: 'UserManagementEdit',
+    components: { MyUpload },
     data() {
       return {
         form: {
-          username: '',
-          password: '',
-          email: '',
-          permissions: [],
+          user_name: '',
+          pwd: '',
+          nickname: '',
+          role: '',
+          headimg: '',
         },
         rules: {
-          username: [
+          user_name: [
             { required: true, trigger: 'blur', message: '请输入用户名' },
           ],
-          password: [
-            { required: true, trigger: 'blur', message: '请输入密码' },
+          nickname: [
+            { required: true, trigger: 'blur', message: '请输入邮箱' },
           ],
-          email: [{ required: true, trigger: 'blur', message: '请输入邮箱' }],
-          permissions: [
-            { required: true, trigger: 'blur', message: '请选择权限' },
-          ],
+          role: [{ required: true, trigger: 'blur', message: '请选择权限' }],
         },
         title: '',
         dialogFormVisible: false,
+        headers: {},
+        uploading: false,
       }
     },
     created() {},
@@ -89,6 +94,12 @@
             return false
           }
         })
+      },
+      handleProgress() {
+        this.uploading = true
+      },
+      handleSuccess() {
+        console.log('成功')
       },
     },
   }
