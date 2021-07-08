@@ -31,7 +31,6 @@ router.beforeResolve(async (to, from, next) => {
       next({ path: '/' })
       if (progressBar) VabProgress.done()
     } else {
-      console.log(store.getters['user/permissions'])
       const hasPermissions =
         store.getters['user/permissions'] &&
         store.getters['user/permissions'].length > 0
@@ -47,7 +46,6 @@ router.beforeResolve(async (to, from, next) => {
           } else {
             permissions = await store.dispatch('user/getUserInfo')
           }
-          console.log(permissions)
           let accessRoutes = []
           if (authentication === 'intelligence') {
             accessRoutes = await store.dispatch('routes/setRoutes', permissions)
