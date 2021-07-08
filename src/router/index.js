@@ -270,6 +270,20 @@ export const asyncRoutes = [
     ],
   },
   {
+    path: '/client',
+    component: Layout,
+    redirect: 'noRedirect',
+    name: 'client',
+    children: [
+      {
+        path: '',
+        name: 'clientMange',
+        component: () => import('@/views/client/index'),
+        meta: { title: '客户列表', icon: 'users-cog' },
+      },
+    ],
+  },
+  {
     path: '/error',
     component: EmptyLayout,
     redirect: 'noRedirect',
