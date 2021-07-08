@@ -38,7 +38,7 @@
 
 <script>
   import { doEdit } from '@/api/userManagement'
-  import MyUpload from '../../../../components/upload.vue'
+  import MyUpload from '../../../components/upload.vue'
 
   export default {
     name: 'UserManagementEdit',
