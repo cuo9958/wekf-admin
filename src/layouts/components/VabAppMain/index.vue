@@ -6,7 +6,7 @@
       </keep-alive>
     </transition>
     <footer v-show="footerCopyright" class="footer-copyright">
-      Copyright 2021
+      Copyright {{ fullYear }}
     </footer>
   </div>
 </template>

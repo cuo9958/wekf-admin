@@ -136,13 +136,6 @@
     beforeDestroy() {
       document.body.style.overflow = 'auto'
     },
-    mounted() {
-      this.form.username = 'admin'
-      this.form.password = '123456'
-      setTimeout(() => {
-        this.handleLogin()
-      }, 3000)
-    },
     methods: {
       handlePassword() {
         this.passwordType === 'password'
@@ -153,7 +146,7 @@
         })
       },
       handleLogin() {
-        this.$refs.form.validate((valid) => {
+        this.$refs.form.validate((valid, err) => {
           if (valid) {
             this.loading = true
             this.$store
@@ -170,6 +163,14 @@
                 this.loading = false
               })
           } else {
+            let errObj = null
+            for (const key in err) {
+              errObj = err[key]
+            }
+            if (errObj && errObj.length > 0) {
+              const msg = errObj[0]
+              this.$message.error(msg.message)
+            }
             return false
           }
         })

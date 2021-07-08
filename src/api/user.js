@@ -1,13 +1,9 @@
 import request from '@/utils/request'
-import { encryptedData } from '@/utils/encrypt'
-import { loginRSA, tokenName } from '@/config'
+import { tokenName } from '@/config'
 
 export async function login(data) {
-  if (loginRSA) {
-    data = await encryptedData(data)
-  }
   return request({
-    url: '/login',
+    url: '/user/login',
     method: 'post',
     data,
   })
@@ -15,18 +11,11 @@ export async function login(data) {
 
 export function getUserInfo(accessToken) {
   return request({
-    url: '/userInfo',
-    method: 'post',
+    url: '/user/userInfo',
+    method: 'get',
     data: {
       [tokenName]: accessToken,
     },
-  })
-}
-
-export function logout() {
-  return request({
-    url: '/logout',
-    method: 'post',
   })
 }
 

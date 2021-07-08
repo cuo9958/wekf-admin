@@ -13,7 +13,7 @@ export function isExternal(path) {
  * @returns {boolean}
  */
 export function isPassword(str) {
-  return str.length >= 6
+  return str.length >= 4
 }
 
 /**
