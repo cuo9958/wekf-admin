@@ -2,18 +2,27 @@
   <div id="client">
     <el-row class="box">
       <el-col :span="6" class="list">
-        <div class="item">客户</div>
+        <div
+          v-for="item in userlist"
+          :key="item.uid"
+          :class="curr_cid === item.cid ? 'item active' : 'item'"
+          @click="selectUser(item)"
+        >
+          客户{{ item.uid }}
+          <p v-if="item.msg !== ''">
+            <small>{{ item.msg }}</small>
+          </p>
+        </div>
+        <div class="item" @click="selectUser(12)">客户adw</div>
       </el-col>
       <el-col :span="18" class="container">
         <div class="container_box">
           <div ref="msg_container" class="msg_list">
-            <div class="item1">
-              <div class="txt">说啥？xxxxx</div>
-            </div>
-            <div class="item2">
-              <div class="txt">说啥？adadwadw</div>
-            </div>
-            <div v-for="item in msglist" :key="item.id" class="item2">
+            <div
+              v-for="item in msglist"
+              :key="item.id"
+              :class="item.cid ? 'item1' : 'item2'"
+            >
               <div class="txt">{{ item.data }}</div>
             </div>
           </div>
@@ -39,6 +48,8 @@
   </div>
 </template>
 <script>
+  import SocketIO from 'socket.io-client'
+
   export default {
     name: 'Client',
     data() {
@@ -46,9 +57,53 @@
         joined: true,
         msg: '',
         msglist: [],
+        client: null,
+        userlist: [],
+        curr: null,
+        curr_cid: '',
       }
     },
+    created() {
+      this.init()
+    },
     methods: {
+      init() {
+        const client = new SocketIO('http://127.0.0.1:8082', {
+          path: '/_img',
+        })
+        client.on('wait', this.wait.bind(this))
+        client.on('talk', this.talk.bind(this))
+        this.client = client
+      },
+      wait(cid, uid, pid) {
+        this.userlist.push({
+          cid,
+          uid,
+          pid,
+          msg: '',
+        })
+      },
+      talk(cid, msg) {
+        console.log(cid, msg)
+        //用户列表展示消息提示
+        this.userlist.forEach((item) => {
+          if (item.cid === cid) item.msg = msg.data
+        })
+        //加入消息列表
+        this.msglist.push({
+          cid: cid,
+          type: msg.type,
+          data: msg.data,
+        })
+      },
+      selectUser(item) {
+        this.curr = item
+        this.curr_cid = item.cid
+        this.getMsglist()
+      },
+      getMsglist() {
+        this.msglist = []
+      },
       msg_end() {
         this.send()
       },
@@ -56,8 +111,7 @@
         const val = this.msg
         if (!val) return
         this.msglist.push({
-          id: Date.now(),
-          uid: 'a',
+          cid: '',
           data: val,
         })
         this.msg = ''
@@ -80,10 +134,37 @@
       width: 100%;
     }
     .list {
-      padding: 10px;
-      background: #eee;
+      background: #f3f3f3;
       box-sizing: border-box;
       height: 100%;
+
+      .item {
+        padding: 10px;
+        border-bottom: solid 1px #ccc;
+        background: #fff;
+        font-size: 14px;
+        color: #333;
+        height: 30px;
+        line-height: 20px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        cursor: pointer;
+
+        p {
+          margin: 0;
+          padding: 0;
+          padding-left: 10px;
+          color: #aaa;
+        }
+        &:hover {
+          background: #f3f3f3;
+        }
+      }
+      .active {
+        background: #efefef;
+      }
     }
     .container {
       height: 100%;
